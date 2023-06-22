@@ -1,17 +1,25 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-
+import { getHealthCheckHandler } from './controllers/health';
 const app = express();
 
 app.use((req: Request, res: Response, next: NextFunction) => { 
     res.setHeader('Access-Control-Allow-Origin', "*");
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, DELETE, PUT');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader(
+        'Access-Control-Allow-Methods', 
+        'OPTIONS, GET, POST, DELETE, PUT'
+        );
+    res.setHeader(
+        'Access-Control-Allow-Headers', 
+        'Content-Type, Authorization'
+        );
     next();
 });
 
 
 //handle incoming json data
 app.use(express.json()) 
+
+app.use('/health', getHealthCheckHandler);
 
 //API pubic routes
 // app.use('/api', publicRoutes);

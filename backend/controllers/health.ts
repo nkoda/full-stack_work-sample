@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import fs from 'fs';
 
 const JSON_FILE_PATH = 'TODO'
-exports.getHealthCheck = (req: Request, res: Response) => {
+export const getHealthCheckHandler = (req: Request, res: Response) => {
     try {
         // File existence check
         if (!fs.existsSync(JSON_FILE_PATH)) {
