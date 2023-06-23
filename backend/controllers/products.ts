@@ -37,13 +37,13 @@ export const addProduct = async (req: Request, res: Response) => {
 
 const validateAddProductRequest = (req: Request, res: Response) => {
     try {
-        productSchema.validate(req.body, {abortEarly: false});
+        addProductSchema.validate(req.body, {abortEarly: false});
     } catch (error) {
         throw new Error('Invalid product parameters');
     }
 }
 
-const productSchema = Joi.object({
+const addProductSchema = Joi.object({
     productName: Joi.string().required(),
     productOwnerName: Joi.string().required(),
     developers: Joi.array().items(Joi.string()).min(1).max(5).required(),
