@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const JSONProductsPath = path.join(
     path.dirname(
         require.main!.filename),
+        '..',
         'data',
         'products.json'
     );

@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
+import { JSONProductsPath } from '../models/products';
 
-const JSON_FILE_PATH = 'TODO'
+const JSON_FILE_PATH = JSONProductsPath
 export const getHealthCheckHandler = (req: Request, res: Response) => {
     try {
         // File existence check
@@ -32,6 +33,6 @@ export const getHealthCheckHandler = (req: Request, res: Response) => {
         }
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ error: 'Health check failed' });
+        res.status(500).json({ error: 'Health check failed,' + error.message});
     }
 };

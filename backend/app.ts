@@ -1,6 +1,7 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 
 import healthRoutes from './routes/health';
+import productRoutes from './routes/products';
 
 const app: Express = express();
 
