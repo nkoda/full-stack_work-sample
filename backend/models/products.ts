@@ -23,7 +23,7 @@ const getProductsFromFile = (callback: (products: Product[]) => void): void => {
 
 const writeProductsToJSON = (
     data: Product[],
-    callback: (error: Error | void) => void
+    callback: (error: Error | void | null) => void
   ): void => {
     fs.writeFile(JSONProductsPath, JSON.stringify(data), err => {
       if (err) {
@@ -81,5 +81,54 @@ export class Product {
         });
     };
 
+    static fetchAll(callback: (products: Product[]) => any): void {
+        getProductsFromFile(callback);
+    };
 
+    static updateProductById(
+        id: string, 
+        attributes: Partial<Product>,
+        callback: (error: Error | null) => void
+        ): void {
+        //get all products in JSON and modify the product list
+        getProductsFromFile((products: Product[]) => {
+            const updatedProducts = Product.modifyProductsById(
+                id, 
+                products, 
+                attributes
+            );
+          // Save Products
+          writeProductsToJSON(updatedProducts, (error: Error | void | null) => {
+            if (error) {
+              callback(error);
+            } else {
+              callback(null);
+            }
+          });
+        });
+      };
+
+      private static modifyProductsById(
+        id: string, 
+        products: Product[], 
+        attributes: Partial<Product>
+        ): Product[] {
+        //locate product with id
+        const updateKeys = Object.keys(attributes);
+        if (!updateKeys.length) {
+          throw new Error('At least one attribute must be updated');
+        }
+        //get productIndex in the fetched data that match the product id
+        const productIndex = 
+        products.findIndex((product: Product) => product.productId === id);
+        if (productIndex === -1) {
+          throw new Error('Product with ID ' + id + ' not found');
+        }
+        // Updating product with new attributes by combining attributes
+        (products[productIndex] as Partial<Product>) = {
+          ...products[productIndex]!,
+          ...attributes,
+        };
+        return products;
+      };
 }
