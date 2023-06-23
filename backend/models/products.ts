@@ -70,7 +70,7 @@ export class Product {
         this.methodology = methodology;
       };
 
-    save(): void {
+    saveToJSON(): void {
         getProductsFromFile((products: Product[]) => {
             products.push(this);
             writeProductsToJSON(products, err => {
@@ -81,8 +81,22 @@ export class Product {
         });
     }
 
-    static fetchAll(callback: (products: Product[]) => any): void {
+    static getAllProducts(callback: (products: Product[]) => any): void {
         getProductsFromFile(callback);
+    }
+
+    static getProductById(
+        id: string,
+        callback: (product: Product) => void
+    ): void {
+        getProductsFromFile(products => {
+          const product = products.find(product => product.productId == id);
+          if (product) {
+            callback(product);
+          } else {
+            throw new Error('No product with ID ' + id + ' exists.');
+        }
+    });
     }
 
     static updateProductById(
@@ -97,7 +111,7 @@ export class Product {
             products,
             attributes
           );
-          // Save Products
+          // Save Products to JSON
           writeProductsToJSON(updatedProducts, (error: Error | void | null) => {
             if (error) {
               callback(error);
@@ -106,9 +120,8 @@ export class Product {
             }
           });
         });
-      }
+    }
       
-
     private static modifyProductsById(
         id: string,
         products: Product[],
@@ -131,20 +144,14 @@ export class Product {
           ...attributes,
         };
         return products;
-    };
+    }
 
-    static getProductById(
-        id: string,
-        callback: (product: Product) => void
-    ): void {
+    static deleteProductById(id, callback) {
         getProductsFromFile(products => {
-          const product = products.find(product => product.productId == id);
-          if (product) {
-            callback(product);
-          } else {
-            throw new Error('No product with ID ' + id + ' exists.');
-        }
-    });
+            const updatedProducts = 
+                products.filter(product => product.productId !== id);
+            writeProductsToJSON(updatedProducts, callback);
+        });
     }
       
 }
