@@ -10,9 +10,9 @@ const router: Router = express.Router();
 
 router.post('/addProduct', addProduct);
 
-router.get('/getAllProducts', getAllProducts);
+router.get('/getProducts', getAllProducts);
 
-router.get('getProductById', getProductById);
+router.get('/getProducts/:id', getProductById);
 
 
 export default router;

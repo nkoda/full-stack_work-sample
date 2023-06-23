@@ -23,6 +23,8 @@ app.use(express.json());
 
 app.use('/', healthRoutes);
 
+app.use('/api', productRoutes);
+
 app.use((req: Request, res: Response, next: NextFunction) => {
     res.status(404).send('<h1>404: Page not found.</h1>');
 });
