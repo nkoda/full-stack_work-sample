@@ -79,24 +79,24 @@ export class Product {
                 }
             });
         });
-    };
+    }
 
     static fetchAll(callback: (products: Product[]) => any): void {
         getProductsFromFile(callback);
-    };
+    }
 
     static updateProductById(
-        id: string, 
+        id: string,
         attributes: Partial<Product>,
         callback: (error: Error | null) => void
-        ): void {
+    ): void {
         //get all products in JSON and modify the product list
         getProductsFromFile((products: Product[]) => {
-            const updatedProducts = Product.modifyProductsById(
-                id, 
-                products, 
-                attributes
-            );
+          const updatedProducts = Product.modifyProductsById(
+            id,
+            products,
+            attributes
+          );
           // Save Products
           writeProductsToJSON(updatedProducts, (error: Error | void | null) => {
             if (error) {
@@ -106,21 +106,22 @@ export class Product {
             }
           });
         });
-      };
+      }
+      
 
-      private static modifyProductsById(
-        id: string, 
-        products: Product[], 
+    private static modifyProductsById(
+        id: string,
+        products: Product[],
         attributes: Partial<Product>
-        ): Product[] {
+    ): Product[] {
         //locate product with id
         const updateKeys = Object.keys(attributes);
         if (!updateKeys.length) {
           throw new Error('At least one attribute must be updated');
         }
         //get productIndex in the fetched data that match the product id
-        const productIndex = 
-        products.findIndex((product: Product) => product.productId === id);
+        const productIndex =
+          products.findIndex((product: Product) => product.productId === id);
         if (productIndex === -1) {
           throw new Error('Product with ID ' + id + ' not found');
         }
@@ -130,5 +131,20 @@ export class Product {
           ...attributes,
         };
         return products;
-      };
+    };
+
+    static getProductById(
+        id: string,
+        callback: (product: Product) => void
+    ): void {
+        getProductsFromFile(products => {
+          const product = products.find(product => product.productId == id);
+          if (product) {
+            callback(product);
+          } else {
+            throw new Error('No product with ID ' + id + ' exists.');
+        }
+    });
+    }
+      
 }
