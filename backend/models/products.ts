@@ -34,16 +34,6 @@ const writeProductsToJSON = (
     });
 };
 
-// export interface Product {
-//     productId: string;
-//     productName: string;
-//     productOwnerName: string;
-//     developers: string[];
-//     scrumMasterName: string;
-//     startDate: Date;
-//     methodology: string;
-// };
-
 export class Product {
     readonly productId: string;
     private productName: string;
@@ -104,14 +94,14 @@ export class Product {
         attributes: Partial<Product>,
         callback: (error: Error | null) => void
     ): void {
-        //get all products in JSON and modify the product list
+        // Get all products in JSON and modify the product list
         getProductsFromFile((products: Product[]) => {
           const updatedProducts = Product.modifyProductsById(
             id,
             products,
             attributes
           );
-          // Save Products to JSON
+          // Save Products to JSON file
           writeProductsToJSON(updatedProducts, (error: Error | void | null) => {
             if (error) {
               callback(error);
@@ -127,12 +117,12 @@ export class Product {
         products: Product[],
         attributes: Partial<Product>
     ): Product[] {
-        //locate product with id
+        // Locate product with id
         const updateKeys = Object.keys(attributes);
         if (!updateKeys.length) {
           throw new Error('At least one attribute must be updated');
         }
-        //get productIndex in the fetched data that match the product id
+        // Get productIndex in the fetched data that match the product id
         const productIndex =
           products.findIndex((product: Product) => product.productId === id);
         if (productIndex === -1) {
@@ -153,5 +143,4 @@ export class Product {
             writeProductsToJSON(updatedProducts, callback);
         });
     }
-      
 }
