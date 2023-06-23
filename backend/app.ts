@@ -1,31 +1,29 @@
 import express, { Express, Request, Response, NextFunction } from "express";
-import { getHealthCheckHandler } from './controllers/health';
-const app = express();
+
+import healthRoutes from './routes/health';
+
+const app: Express = express();
 
 app.use((req: Request, res: Response, next: NextFunction) => { 
     res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader(
         'Access-Control-Allow-Methods', 
         'OPTIONS, GET, POST, DELETE, PUT'
-        );
+    );
     res.setHeader(
         'Access-Control-Allow-Headers', 
         'Content-Type, Authorization'
-        );
+    );
     next();
 });
 
+// Handle incoming JSON data
+app.use(express.json());
 
-//handle incoming json data
-app.use(express.json()) 
-
-app.use('/health', getHealthCheckHandler);
-
-//API pubic routes
-// app.use('/api', publicRoutes);
+app.use('/', healthRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.status(404).send('<h1> 404: Page not found.</h1>')
-})
+    res.status(404).send('<h1>404: Page not found.</h1>');
+});
 
 app.listen(3000);
