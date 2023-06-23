@@ -10,7 +10,7 @@ export const JSONProductsPath = path.join(
         'products.json'
     );
 
-const getProductsFromFile = (callback: (products: any[]) => void): void => {
+const getProductsFromFile = (callback: (products: Product[]) => void): void => {
     fs.readFile(JSONProductsPath, (err: any, fileContent: Buffer) => {
         if (err) {
             callback([]);
@@ -22,7 +22,7 @@ const getProductsFromFile = (callback: (products: any[]) => void): void => {
 };
 
 const writeProductsToJSON = (
-    data: Product,
+    data: Product[],
     callback: (error: Error | void) => void
   ): void => {
     fs.writeFile(JSONProductsPath, JSON.stringify(data), err => {
@@ -34,12 +34,52 @@ const writeProductsToJSON = (
     });
 };
 
-export interface Product {
-    productId: uuidv4;
-    productName: string;
-    productOwnerName: string;
-    developers: string[];
-    scrumMasterName: string;
-    startDate: Date;
-    methodology: string;
-};
+// export interface Product {
+//     productId: string;
+//     productName: string;
+//     productOwnerName: string;
+//     developers: string[];
+//     scrumMasterName: string;
+//     startDate: Date;
+//     methodology: string;
+// };
+
+export class Product {
+    readonly productId: string;
+    private productName: string;
+    private productOwnerName: string;
+    private developers: string[];
+    private scrumMasterName: string;
+    private startDate: Date;
+    private methodology: string;
+
+    constructor(
+        name: string,
+        ownerName: string,
+        developers: string[],
+        scrumMasterName: string,
+        startDate: Date,
+        methodology: string
+      ) {
+        this.productId = uuidv4();
+        this.productName = name;
+        this.productOwnerName = ownerName;
+        this.developers = developers;
+        this.scrumMasterName = scrumMasterName;
+        this.startDate = startDate;
+        this.methodology = methodology;
+      };
+
+    save(): void {
+        getProductsFromFile((products: Product[]) => {
+            products.push(this);
+            writeProductsToJSON(products, err => {
+                if (err) {
+                    throw new Error('Saved failed: ' + err.message);
+                }
+            });
+        });
+    };
+
+
+}
