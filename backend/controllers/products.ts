@@ -5,9 +5,6 @@ import Joi from 'joi';
 
 import { Product } from '../models/products';
 
-export const getAllProducts = (req: Request, res: Response) => { 
-    Product.getAllProducts(products => res.status(200).json(products));
-}
 
 export const addProduct = async (req: Request, res: Response) => {
     try {
@@ -19,27 +16,50 @@ export const addProduct = async (req: Request, res: Response) => {
             scrumMasterName,
             startDate,
             methodology
-          } = req.body;
+        } = req.body;
         const product = new Product(
-        productName,
-        productOwnerName,
-        developers,
-        scrumMasterName,
-        startDate,
-        methodology
-        );
-        product.saveToJSON();
-        res.status(200).send('data recieved');
+            productName,
+            productOwnerName,
+            developers,
+            scrumMasterName,
+            startDate,
+            methodology
+            );
+            product.saveToJSON();
+            res.status(200).send('data recieved');
+        } catch (error) {
+            res.status(400).send(error)
+        }
+}
+    
+export const getAllProducts = async (req: Request, res: Response) => { 
+    Product.getAllProducts(products => res.status(200).json(products));
+}
+
+export const getProductById = (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        validateProductId(id);
+        Product.getProductById(id, product => res.status(200).json(product));
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error);
     }
 }
 
-const validateAddProductRequest = (req: Request, res: Response) => {
+const validateAddProductRequest = async (req: Request, res: Response) => {
     try {
         addProductSchema.validate(req.body, {abortEarly: false});
     } catch (error) {
         throw new Error('Invalid product parameters');
+    }
+}
+
+const validateProductId = (id: string) => {
+    const schema = Joi.string().uuid();
+    try {
+        schema.validate(id);
+    } catch (error) {
+        throw new Error("Invalid product id");
     }
 }
 
