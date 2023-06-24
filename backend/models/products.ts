@@ -92,7 +92,7 @@ export class Product {
 
     static updateProductById(
         id: string,
-        attributes: Partial<Product>,
+        attributes: Record<string, any>,
         callback: (error: Error | null) => void
     ): void {
         // Get all products in JSON and modify the product list
@@ -103,7 +103,9 @@ export class Product {
             attributes
           );
           // Save Products to JSON file
-          writeProductsToJSON(updatedProducts, (error: Error | void | null) => {
+          writeProductsToJSON(
+            updatedProducts, 
+            (error: Error | void | null) => {
             if (error) {
               callback(error);
             } else {
