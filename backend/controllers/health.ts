@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
-import { JSONProductsPath } from '../models/products';
+import { JSONProductsPath } from '../utils/connect';
 
 const JSON_FILE_PATH = JSONProductsPath
 /**
