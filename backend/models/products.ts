@@ -3,7 +3,6 @@ import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { getProductsFromFile, writeProductsToJSON } from '../utils/connect';
 
-
 export class Product {
     readonly productId: string;
     private productName: string;

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Product } from '../models/products';
+
 /**
  * The path to the products data file.
  * @type {string}

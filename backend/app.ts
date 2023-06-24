@@ -5,7 +5,6 @@ import productRoutes from './routes/products';
 import SwaggerSpec  from './utils/swagger';
 import swaggerUi from 'swagger-ui-express'
 
-const port: number = 3000;
 const app: Express = express();
 
 app.use((req: Request, res: Response, next: NextFunction) => { 
