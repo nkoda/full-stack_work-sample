@@ -9,6 +9,7 @@ export const getHealthCheckHandler = (req: Request, res: Response) => {
         if (!fs.existsSync(JSON_FILE_PATH)) {
             throw new Error('JSON file does not exist');
         }
+
         // File read check
         const fileContent = fs.readFileSync(JSON_FILE_PATH, 'utf8');      
 
@@ -31,6 +32,7 @@ export const getHealthCheckHandler = (req: Request, res: Response) => {
             uptime: process.uptime(),
             date: new Date()
         }
+
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({ error: 'Health check failed,' + error.message});
