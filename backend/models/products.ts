@@ -2,7 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
-// Path to products data file
+/**
+ * The path to the products data file.
+ * @type {string}
+ */
 export const JSONProductsPath = path.join(
     path.dirname(
         require.main!.filename),
@@ -11,6 +14,12 @@ export const JSONProductsPath = path.join(
         'products.json'
     );
 
+/**
+ * Callback function for getting products from file.
+ * @callback GetProductsCallback
+ * @param {Product[]} products - The products retrieved from the file.
+ * @returns {void}
+ */
 const getProductsFromFile = (callback: (products: Product[]) => void): void => {
     fs.readFile(JSONProductsPath, (err: any, fileContent: Buffer) => {
         if (err) {
@@ -22,6 +31,12 @@ const getProductsFromFile = (callback: (products: Product[]) => void): void => {
     });
 };
 
+/**
+ * Callback function for writing products to file.
+ * @callback WriteProductsCallback
+ * @param {Error | void | null} error - The error occurred during the write operation, if any.
+ * @returns {void}
+ */
 const writeProductsToJSON = (
     data: Product[],
     callback: (error: Error | void | null) => void
@@ -44,6 +59,15 @@ export class Product {
     private startDate: Date;
     private methodology: string;
 
+    /**
+     * Creates a new instance of the Product class.
+     * @param {string} name - The name of the product.
+     * @param {string} ownerName - The name of the product owner.
+     * @param {string[]} developers - The developers working on the product.
+     * @param {string} scrumMasterName - The name of the scrum master.
+     * @param {Date} startDate - The start date of the product.
+     * @param {string} methodology - The methodology used for the product.
+     */
     constructor(
         name: string,
         ownerName: string,
@@ -61,6 +85,11 @@ export class Product {
         this.methodology = methodology;
       };
 
+    /**
+     * Saves the product to the JSON file.
+     * @returns {void}
+     * @throws {Error} If the save operation fails.
+     */
     saveToJSON(): void {
         getProductsFromFile((products: Product[]) => {
             products.push(this);
@@ -72,10 +101,22 @@ export class Product {
         });
     }
 
+    /**
+     * Gets all products from the JSON file.
+     * @param {GetProductsCallback} callback - The callback function to handle the retrieved products.
+     * @returns {void}
+     */
     static getAllProducts(callback: (products: Product[]) => any): void {
         getProductsFromFile(callback);
     }
 
+    /**
+     * Gets a product by its ID from the JSON file.
+     * @param {string} id - The ID of the product to retrieve.
+     * @param {function} callback - The callback function to handle the retrieved product.
+     * @returns {void}
+     * @throws {Error} If no product with the specified ID exists.
+     */
     static getProductById(
         id: string,
         callback: (product: Product) => void
@@ -90,6 +131,14 @@ export class Product {
     });
     }
 
+    /**
+     * Updates a product by its ID in the JSON file.
+     * @param {string} id - The ID of the product to update.
+     * @param {Record<string, any>} attributes - The attributes to update.
+     * @param {function} callback - The callback function to handle the result of the update operation.
+     * @returns {void}
+     * @throws {Error} If no attribute is provided for update or if the product with the specified ID is not found.
+     */
     static updateProductById(
         id: string,
         attributes: Record<string, any>,
@@ -114,7 +163,15 @@ export class Product {
           });
         });
     }
-      
+    
+    /**
+     * Modifies the products by ID with the provided attributes.
+     * @param {string} id - The ID of the product to modify.
+     * @param {Product[]} products - The array of products.
+     * @param {Partial<Product>} attributes - The attributes to update.
+     * @returns {Product[]} The updated array of products.
+     * @throws {Error} If no attribute is provided for update or if the product with the specified ID is not found.
+     */
     private static modifyProductsById(
         id: string,
         products: Product[],
@@ -138,7 +195,13 @@ export class Product {
         };
         return products;
     }
-
+    
+    /**
+     * Deletes a product by its ID from the JSON file.
+     * @param {string} id - The ID of the product to delete.
+     * @param {function} callback - The callback function to handle the result of the delete operation.
+     * @returns {void}
+     */
     static deleteProductById(
         id: string, 
         callback: (error: Error | null) => void) {

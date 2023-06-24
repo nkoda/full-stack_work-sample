@@ -3,6 +3,13 @@ import fs from 'fs';
 import { JSONProductsPath } from '../models/products';
 
 const JSON_FILE_PATH = JSONProductsPath
+/**
+ * Handles the health check request.
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @returns {void}
+ * @throws {Error} If the JSON file does not exist or is corrupted.
+ */
 export const getHealthCheckHandler = (req: Request, res: Response) => {
     try {
         // File existence check
