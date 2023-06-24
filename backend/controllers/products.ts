@@ -32,7 +32,11 @@ export const addProduct = async (req: Request, res: Response) => {
 }
     
 export const getAllProducts = async (req: Request, res: Response) => { 
+  try {
     Product.getAllProducts(products => res.status(200).json(products));
+  } catch (error) {
+    res.status(400).send(error);
+  }
 }
 
 export const getProductById = (req: Request, res: Response) => {
