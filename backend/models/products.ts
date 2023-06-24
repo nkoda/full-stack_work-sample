@@ -139,7 +139,9 @@ export class Product {
         return products;
     }
 
-    static deleteProductById(id, callback) {
+    static deleteProductById(
+        id: string, 
+        callback: (error: Error | null) => void) {
         getProductsFromFile(products => {
             const updatedProducts = 
                 products.filter(product => product.productId !== id);

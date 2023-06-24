@@ -47,26 +47,46 @@ export const getProductById = (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
     try {
-        const id = req.params.id;
-        validateProductId(id);
-        validateProductRequest(req, res, updateProductSchema);
-        const updatedFields: Record<string, any> = {
-            productName: req.body.productName,
-            productOwnerName: req.body.productOwnerName,
-            developers: req.body.developers,
-            scrumMasterName: req.body.scrumMasterName,
-            startDate: req.body.startDate,
-            methodology: req.body.methodology,
-        };
-        Product.updateProductById(
-            id, 
-            updatedFields, 
-            () => { res.status(200).send('Successfully updated Product')}
-        );
+      const id = req.params.id;
+      validateProductId(id);
+      validateProductRequest(req, res, updateProductSchema);
+  
+      const updatedFields: Record<string, any> = {
+        productName: req.body.productName,
+        productOwnerName: req.body.productOwnerName,
+        developers: req.body.developers,
+        scrumMasterName: req.body.scrumMasterName,
+        startDate: req.body.startDate,
+        methodology: req.body.methodology,
+      };
+  
+      Product.updateProductById(id, updatedFields, err => {
+        if (err) {
+          throw new Error('Product deletion failed');
+        }
+        res.status(200).send('Successfully deleted product');
+      });
     } catch (error) {
-        res.status(400).send(error);
+      res.status(400).send(error);
     }
-}
+};
+  
+
+export const deleteProduct = async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      validateProductId(id);
+      Product.deleteProductById(id, err => {
+        if (err) {
+          throw new Error('Product deletion failed');
+        }
+        res.status(200).send('Successfully deleted product');
+      });
+    } catch (error) {
+      res.status(400).send(error);
+    }
+};
+  
 
 const validateProductRequest = async (
     req: Request, 

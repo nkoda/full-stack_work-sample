@@ -3,17 +3,11 @@ import {
     addProduct, 
     getAllProducts, 
     getProductById,
-    updateProduct
+    updateProduct,
+    deleteProduct
 } from '../controllers/products';
 
 const router: Router = express.Router();
-
-router.post('/addProduct', addProduct);
-
-router.get('/getProducts', getAllProducts);
-
-router.get('/getProducts/:id', getProductById);
-
-router.post('/updateProduct/:id', updateProduct);
+ 
 
 export default router;
