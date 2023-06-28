@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnChanges } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,8 +11,8 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements AfterViewInit {
-  
+export class DataTableComponent implements AfterViewInit, OnChanges{
+  data: Product[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Product>;
@@ -23,16 +23,22 @@ export class DataTableComponent implements AfterViewInit {
   displayedColumns = keyOfProducts;
 
   constructor(private productService: ProductService) {
-    this.dataSource = new DataTableDataSource();
+    this.dataSource = new DataTableDataSource(this.data);
+  }
+  
+  ngOnChanges(): void {
+    this.productService.getAllProducts().subscribe(products => {
+      this.dataSource.setData(products);
+      this.table.dataSource = this.dataSource; 
+    });
   }
   
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
     this.productService.getAllProducts().subscribe(products => {
       this.dataSource.setData(products);
-      this.table.dataSource = this.dataSource; // Update table reference after setting the data source
-    })
+      this.table.dataSource = this.dataSource; 
+    });
   }
 }

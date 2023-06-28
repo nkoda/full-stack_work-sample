@@ -16,8 +16,9 @@ export class DataTableDataSource extends DataSource<Product> {
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor() {
+  constructor(data: Product[]) {
     super();
+    this.data = data;
   }
 
   /**
@@ -45,9 +46,7 @@ export class DataTableDataSource extends DataSource<Product> {
   disconnect(): void {}
 
   setData(updateData: Product[]): void {
-    this.data = [...updateData];
-    this.connect().subscribe(() => {
-    });
+    this.data = this.getPagedData([...updateData]);
   }
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
