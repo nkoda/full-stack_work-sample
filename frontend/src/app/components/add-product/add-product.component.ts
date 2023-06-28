@@ -34,13 +34,6 @@ export class AddProductComponent implements OnInit{
 
   }
 
-  addDeveloper() {
-    if (this.newDeveloper.trim() !== '') {
-      this.developers.push(this.newDeveloper.trim());
-      this.newDeveloper = ''; // Clear the input field
-    }
-  }
-
   onSubmit() {
     let missingAttributes = [];
 
@@ -87,12 +80,9 @@ export class AddProductComponent implements OnInit{
       methodology: this.methodology,
       location: this.location
     }
-    console.log('submitting')
     this.productService.addProduct(newProduct).subscribe(() => {
-      console.log('emitting')
-    })
+    });
     this.onAddProduct.emit();
-    console.log('done')
   }
 
 }
