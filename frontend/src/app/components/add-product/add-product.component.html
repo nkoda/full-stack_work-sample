@@ -1,0 +1,75 @@
+<!-- <p>add-product works!</p> -->
+<form *ngIf="showAddProduct" class="add-form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label for="productName">Product Name</label>
+      <input
+        type="text"
+        name="productName"
+        id="productName"
+        [(ngModel)]="productName"
+        placeholder="Add Product Name"
+      />
+    </div>
+    <div class="form-control">
+      <label for="productOwnerName">Product Owner Name</label>
+      <input
+        type="text"
+        name="productOwnerName"
+        id="productOwnerName"
+        [(ngModel)]="productOwnerName"
+        placeholder="Add Product Owner Name"
+      />
+    </div>
+    <div class="form-control">
+      <label for="developers">Developers</label>
+      <input
+        type="text"
+        name="developers"
+        id="developers"
+        [(ngModel)]="developers"
+        placeholder="Add Developers (comma-separated)"
+      />
+    </div>
+    <div class="form-control">
+      <label for="scrumMasterName">Scrum Master Name</label>
+      <input
+        type="text"
+        name="scrumMasterName"
+        id="scrumMasterName"
+        [(ngModel)]="scrumMasterName"
+        placeholder="Add Scrum Master Name"
+      />
+    </div>
+    <div class="form-control">
+      <label for="startDate">Start Date</label>
+      <input
+        type="text"
+        name="startDate"
+        id="startDate"
+        [(ngModel)]="startDate"
+        placeholder="Add Start Date"
+      />
+    </div>
+    <div class="form-control">
+      <label for="methodology">Methodology</label>
+      <input
+        type="text"
+        name="methodology"
+        id="methodology"
+        [(ngModel)]="methodology"
+        placeholder="Add Methodology"
+      />
+    </div>
+    <div class="form-control">
+      <label for="location">Location</label>
+      <input
+        type="text"
+        name="location"
+        id="location"
+        [(ngModel)]="location"
+        placeholder="Add Location"
+      />
+    </div>
+    <input type="submit" value="Save Product" class="btn btn-block" />
+  </form>
+  

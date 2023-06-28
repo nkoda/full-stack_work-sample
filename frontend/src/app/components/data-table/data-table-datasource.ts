@@ -78,7 +78,7 @@ export class DataTableDataSource extends DataSource<Product> {
         case 'productOwnerName': return compare(a.productOwnerName, b.productOwnerName, isAsc);
         case 'scrumMasterName': return compare(a.scrumMasterName, b.scrumMasterName, isAsc);
         case 'methodology': return compare(a.methodology, b.methodology, isAsc);
-        case 'methodology': return compare(a.startDate, b.startDate, isAsc);
+        case 'startDate': return compare(+a.startDate, +b.startDate, isAsc);
         default: return 0;
       }
     });
