@@ -49,8 +49,16 @@
 
     <!-- Methodology Column -->
     <ng-container matColumnDef="methodology">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>methodology</th>
-      <td mat-cell *matCellDef="let row">{{row.methodology}}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Methodology</th>
+      <td mat-cell *matCellDef="let row">       
+        <div 
+          [class.agile]="row.methodology === 'agile'" 
+          [class.waterfall]="row.methodology === 'waterfall'" 
+          class="badge"
+          >
+          {{row.methodology}}
+        </div>
+      </td>
     </ng-container>
 
     <!-- Location Column -->

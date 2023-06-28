@@ -8,4 +8,30 @@
   color: inherit;
   text-decoration: none;
 }
+
+.data-table a:hover {
+  text-decoration: underline;
+}
  
+.badge {
+  max-width: 100px;
+  text-align: center;
+  border: 1px solid steelblue;
+  border-radius: 5px;
+}
+
+.agile {
+  max-width: 100px;
+  text-align: center;
+  border: 1px solid #f57c00;
+  border-radius: 5px;
+  background-color: #f57c00;
+}
+
+.waterfall {
+  max-width: 100px;
+  text-align: center;
+  border: 1px solid #00b0ff;
+  border-radius: 5px;
+  background-color:#00b0ff;
+}
