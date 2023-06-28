@@ -10,14 +10,14 @@ export interface Product {
   }
   
   export const keyOfProducts: string[] = [
-    'productId',
-    'productName',
-    'productOwnerName',
-    'developers',
-    'scrumMasterName',
-    'startDate',
-    'methodology',
-    'location'
-  ]
+      'productName',
+      'productOwnerName',
+      'developers',
+      'scrumMasterName',
+      'startDate',
+      'methodology',
+      'location',
+      'productId'
+    ]
   
   

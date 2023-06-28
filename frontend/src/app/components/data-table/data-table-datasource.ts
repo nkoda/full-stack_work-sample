@@ -313,9 +313,11 @@ export class DataTableDataSource extends DataSource<Product> {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
         case 'productId': return compare(a.productName, b.productName, isAsc);
+        case 'productName': return compare(a.productName, b.productName, isAsc);
         case 'productOwnerName': return compare(a.productOwnerName, b.productOwnerName, isAsc);
         case 'scrumMasterName': return compare(a.scrumMasterName, b.scrumMasterName, isAsc);
         case 'methodology': return compare(a.methodology, b.methodology, isAsc);
+        case 'methodology': return compare(a.startDate, b.startDate, isAsc);
         default: return 0;
       }
     });
