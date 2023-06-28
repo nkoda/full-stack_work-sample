@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit{
-  @Output() onAddProduct: EventEmitter<any> = new EventEmitter();
+  @Output() onAddProduct: EventEmitter<void> = new EventEmitter<void>();
   productName!: string;
   productOwnerName!: string;
   developers!: string[];
@@ -87,9 +87,12 @@ export class AddProductComponent implements OnInit{
       methodology: this.methodology,
       location: this.location
     }
-    this.productService.addProduct(newProduct).subscribe(value => {
-      this.onAddProduct.emit();
+    console.log('submitting')
+    this.productService.addProduct(newProduct).subscribe(() => {
+      console.log('emitting')
     })
+    this.onAddProduct.emit();
+    console.log('done')
   }
 
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements AfterViewInit, OnChanges{
+export class DataTableComponent implements AfterViewInit{
   data: Product[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -26,27 +26,23 @@ export class DataTableComponent implements AfterViewInit, OnChanges{
     this.dataSource = new DataTableDataSource(this.data);
   }
   
-  ngOnChanges(): void {
-    this.productService.getAllProducts().subscribe(products => {
-      this.dataSource.setData(products);
-      this.table.dataSource = this.dataSource; 
-    });
-  }
   
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.productService.getAllProducts().subscribe(products => {
-      this.dataSource.setData(products);
-      this.table.dataSource = this.dataSource; 
+      this.data = [...products];
+      this.dataSource.setData(this.data);
+      this.table.renderRows()
     });
   }
   
   updateProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
+      this.data = [...products];
       this.dataSource.setData(products);
-      alert(products)
-      alert("Success")
+      time
+      this.table.renderRows()
     });
   }
 }

@@ -46,7 +46,7 @@ export class DataTableDataSource extends DataSource<Product> {
   disconnect(): void {}
 
   setData(updateData: Product[]): void {
-    this.data = this.getPagedData([...updateData]);
+    this.data = [...updateData];
   }
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
