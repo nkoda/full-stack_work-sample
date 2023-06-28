@@ -14,6 +14,7 @@ export class AddProductComponent implements OnInit{
   productName!: string;
   productOwnerName!: string;
   developers!: string[];
+  newDeveloper: string = '';
   scrumMasterName!: string;
   startDate!: Date;
   methodology!: string;
@@ -31,6 +32,13 @@ export class AddProductComponent implements OnInit{
 
   ngOnInit(): void {
 
+  }
+
+  addDeveloper() {
+    if (this.newDeveloper.trim() !== '') {
+      this.developers.push(this.newDeveloper.trim());
+      this.newDeveloper = ''; // Clear the input field
+    }
   }
 
   onSubmit() {

@@ -6,7 +6,13 @@
       [pageSizeOptions]="[5, 10, 20]"
       aria-label="Select page">
   </mat-paginator>
-  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="data">
+  <table 
+  mat-table 
+  class="full-width-table" 
+  matSort 
+  aria-label="Elements" 
+  [dataSource]="data"
+  (onAddProduct)="updateProducts()">
     <!-- Id Column -->
     <ng-container matColumnDef="productId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Product ID</th>

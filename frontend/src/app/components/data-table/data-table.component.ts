@@ -41,4 +41,12 @@ export class DataTableComponent implements AfterViewInit, OnChanges{
       this.table.dataSource = this.dataSource; 
     });
   }
+  
+  updateProducts(): void {
+    this.productService.getAllProducts().subscribe(products => {
+      this.dataSource.setData(products);
+      alert(products)
+      alert("Success")
+    });
+  }
 }
