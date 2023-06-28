@@ -1,4 +1,5 @@
 <div class="mat-elevation-z8 data-table" >
+  <app-add-product (onAddProduct)="updateProducts()"></app-add-product>
   <mat-paginator #paginator
       [length]="dataSource.data.length"
       [pageIndex]="0"
@@ -12,7 +13,7 @@
   matSort 
   aria-label="Elements" 
   [dataSource]="data"
-  (onAddProduct)="updateProducts()">
+  >
     <!-- Id Column -->
     <ng-container matColumnDef="productId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Product ID</th>
