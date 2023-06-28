@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NewProduct, Product } from '../Product';
 
@@ -17,6 +17,12 @@ export class ProductService {
 
   constructor(private http:HttpClient) { }
 
+  private _refreshNeeded$ = new Subject<void>();
+
+  get refreshNeeded$() {
+    return this._refreshNeeded$;
+  }
+
   addProduct(product: NewProduct):Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product, httpOptions);
   } 
@@ -27,7 +33,12 @@ export class ProductService {
   }
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(this.apiUrl)
+    .pipe(
+      tap(() => {
+        this._refreshNeeded$.next();
+      })
+    );
   }
 
   updateProduct(product: Product, body: any): Observable<Product> {
