@@ -11,6 +11,7 @@ export class Product {
     private scrumMasterName: string;
     private startDate: Date;
     private methodology: string;
+    private location: string;
   
 
     /**
@@ -21,6 +22,7 @@ export class Product {
      * @param {string} scrumMasterName - The name of the scrum master.
      * @param {Date} startDate - The start date of the product.
      * @param {string} methodology - The methodology used for the product.
+     * @param {string} location - The repository location of the product.
      */
     constructor(
         name: string,
@@ -28,7 +30,8 @@ export class Product {
         developers: string[],
         scrumMasterName: string,
         startDate: Date,
-        methodology: string
+        methodology: string,
+        location: string
       ) {
         this.productId = uuidv4();
         this.productName = name;
@@ -37,6 +40,7 @@ export class Product {
         this.scrumMasterName = scrumMasterName;
         this.startDate = startDate;
         this.methodology = methodology;
+        this.location = location;
       };
 
     /**

@@ -21,7 +21,8 @@ export const addProduct = async (req: Request, res: Response) => {
             developers,
             scrumMasterName,
             startDate,
-            methodology
+            methodology,
+            location
         } = req.body;
         const product = new Product(
             productName,
@@ -29,7 +30,8 @@ export const addProduct = async (req: Request, res: Response) => {
             developers,
             scrumMasterName,
             startDate,
-            methodology
+            methodology,
+            location
             );
             product.saveToJSON();
             res.status(200).send('data recieved');
@@ -93,6 +95,7 @@ export const updateProduct = async (req: Request, res: Response) => {
         scrumMasterName: req.body.scrumMasterName,
         startDate: req.body.startDate,
         methodology: req.body.methodology,
+        location: req.body.location,
       };
   
       Product.updateProductById(id, updatedFields, err => {
@@ -170,7 +173,8 @@ const addProductSchema = Joi.object({
     developers: Joi.array().items(Joi.string()).min(1).max(5).required(),
     scrumMasterName: Joi.string().required(),
     startDate: Joi.date().required(),
-    methodology: Joi.string().max(15)
+    methodology: Joi.string().max(15),
+    location: Joi.string().uri().required()
 })
 
 const updateProductSchema = Joi.object({
@@ -179,5 +183,6 @@ const updateProductSchema = Joi.object({
     developers: Joi.array().items(Joi.string()).min(1).max(5),
     scrumMasterName: Joi.string(),
     startDate: Joi.date(),
-    methodology: Joi.string().max(15)
+    methodology: Joi.string().max(15),
+    location: Joi.string().uri()
 })
