@@ -11,6 +11,7 @@ export class Product {
     private scrumMasterName: string;
     private startDate: Date;
     private methodology: string;
+  
 
     /**
      * Creates a new instance of the Product class.
