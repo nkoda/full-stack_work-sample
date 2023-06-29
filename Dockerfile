@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:14-alpine
+FROM node:18 as backend
 
 # Set the working directory in the container
 WORKDIR /app
@@ -22,19 +22,18 @@ EXPOSE 3000
 # Start the backend server
 CMD ["npm", "start"]
 
-# Open a new terminal stage for the frontend
-
 # Create a new stage
-FROM node:14-alpine as frontend
+FROM node:18 as frontend
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files to the container
 COPY frontend/package*.json ./frontend/
+COPY frontend/package-lock.json ./frontend/
 
 # Install frontend dependencies
-RUN cd frontend && npm install
+RUN cd frontend && npm ci
 
 # Copy the frontend source code to the container
 COPY frontend/ ./frontend/
@@ -46,7 +45,7 @@ WORKDIR /app/frontend
 EXPOSE 4200
 
 # Build the Angular app
-RUN npm run build
+RUN npm run
 
 # Start the Angular development server
 CMD ["npm", "start"]
