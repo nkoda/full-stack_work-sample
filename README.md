@@ -38,18 +38,18 @@ Running this project:
 
 ##### SSH Clone:
 ```
-$ git clone git@github.com:nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408.git
+git clone git@github.com:nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408.git
 ```
 
 ##### HTTP Clone:
 ```
-$ git clone https://github.com/nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408.git
+git clone https://github.com/nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408.git
 ```
 
 
 2. Navigate to the root of the repository directory:
 ```
-$ cd ../nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408
+cd nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408
 ```
 
 3. Run the dockerfile
