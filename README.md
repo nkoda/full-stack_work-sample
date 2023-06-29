@@ -49,7 +49,7 @@ $ git clone https://github.com/nkoda/full-stack_work-sample.git
 
 2. Navigate to the root of the repository directory:
 ```
-$ cd ../Atlas.git
+$ cd ../full-stack_work-sample.git
 ```
 
 3. Run the dockerfile
