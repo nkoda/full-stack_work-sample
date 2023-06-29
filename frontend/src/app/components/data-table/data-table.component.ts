@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
+
 export class DataTableComponent implements AfterViewInit {
   data: Product[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -25,7 +26,7 @@ export class DataTableComponent implements AfterViewInit {
   constructor(private productService: ProductService) {
     this.dataSource = new DataTableDataSource(this.data);
   }
-  
+
   ngAfterViewInit(): void {
     this.productService.refreshNeeded$
     .subscribe(() => {

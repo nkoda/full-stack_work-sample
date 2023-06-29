@@ -8,7 +8,7 @@
 * [Troubleshooting](#troubleshooting)
 
 ## General info
-A full-stack application which catalogs active projects within an organization.
+A full-stack application work sample which catalogs active projects within an organization.
 	
 ## Technologies
 Project is created with:
@@ -38,23 +38,24 @@ Running this project:
 
 ##### SSH Clone:
 ```
-$ git clone git@github.com:nkoda/Atlas.git
+git clone git@github.com:nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408.git
 ```
 
 ##### HTTP Clone:
 ```
-$ git clone https://github.com/nkoda/Atlas.git
+git clone https://github.com/nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408.git
 ```
 
 
 2. Navigate to the root of the repository directory:
 ```
-$ cd ../Atlas.git
+cd nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408
 ```
 
 3. Run the dockerfile
 ```
-$ docker build -t my-app .
+docker build -t my-app .
+docker run -p 3000:3000 -p 4200:4200 my-app
 
 ```
 
