@@ -3,6 +3,8 @@ import { NewProduct } from 'src/app/Product';
 import { UiService } from 'src/app/services/ui.service';
 import { ProductService } from 'src/app/services/product.service'
 import { Subscription } from 'rxjs'
+import { FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-add-product',
@@ -13,10 +15,10 @@ export class AddProductComponent implements OnInit{
   @Output() onAddProduct: EventEmitter<void> = new EventEmitter<void>();
   productName!: string;
   productOwnerName!: string;
-  developers!: string[];
+  developers!: string;
   newDeveloper: string = '';
   scrumMasterName!: string;
-  startDate!: Date;
+  startDate!: string;
   methodology!: string;
   location!: string;
 
@@ -33,6 +35,7 @@ export class AddProductComponent implements OnInit{
   ngOnInit(): void {
 
   }
+  
 
   onSubmit() {
     let missingAttributes = [];
@@ -71,18 +74,21 @@ export class AddProductComponent implements OnInit{
       return;
     }
 
+    const cleanedDevs = this.developers.split(", ").map(item => item.trim())
+
     const newProduct: NewProduct = {
       productName: this.productName,
       productOwnerName: this.productOwnerName,
-      developers: this.developers,
+      developers: cleanedDevs,
       scrumMasterName: this.scrumMasterName,
       startDate: this.startDate,
       methodology: this.methodology,
       location: this.location
     }
     this.productService.addProduct(newProduct).subscribe(() => {
+      this.onAddProduct.emit();
     });
-    this.onAddProduct.emit();
+    alert("Added New Product")
   }
 
 }

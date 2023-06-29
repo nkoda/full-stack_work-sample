@@ -8,8 +8,8 @@
             <div class="form-control">
                 <mat-form-field>
                     <mat-label>Product Name</mat-label>
-                    <input matInput type="text" name="productName" [(ngModel)]="productName"
-                        placeholder="Add Product Name" required>
+                    <input matInput type="text" name="productName" [(ngModel)]="productName" required>
+                    <mat-hint>Add Product Name</mat-hint>
                     <mat-error *ngIf="!productName"></mat-error>
                 </mat-form-field>
             </div>
@@ -18,15 +18,16 @@
                     <mat-label>Product Owner Name</mat-label>
                     <input matInput type="text" name="productOwnerName" [(ngModel)]="productOwnerName"
                         placeholder="Add Product Owner Name" required>
+                        <mat-hint>Add Product Owner's Name</mat-hint>
                     <mat-error *ngIf="!productOwnerName"></mat-error>
                 </mat-form-field>
             </div>
             <div class="form-control">
                 <mat-form-field>
-                    <mat-label>Developers</mat-label>
-                    <input matInput type="text" name="developers" [(ngModel)]="developers"
-                        placeholder="Add Developers (comma-separated)" required>
-                    <mat-error *ngIf="!developers"></mat-error>
+                    <mat-label>Location</mat-label>
+                    <input matInput type="url" name="location" [(ngModel)]="location" placeholder="Add Location" required>
+                    <mat-hint>Add Product repository URL (http | https)</mat-hint>
+                    <mat-error *ngIf="!location"></mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -35,25 +36,25 @@
             <div class="form-control">
                 <mat-form-field>
                     <mat-label>Scrum Master Name</mat-label>
-                    <input matInput type="text" name="scrumMasterName" [(ngModel)]="scrumMasterName"
-                        placeholder="Add Scrum Master Name" required>
+                    <input matInput type="text" name="scrumMasterName" [(ngModel)]="scrumMasterName" required>
+                    <mat-hint>Add ScrumMaster's Name</mat-hint>
                     <mat-error *ngIf="!scrumMasterName"></mat-error>
                 </mat-form-field>
             </div>
             <div class="form-control">
                 <mat-form-field>
                     <mat-label>Start Date</mat-label>
-                    <input matInput type="date" name="startDate" [(ngModel)]="startDate" placeholder="Add Start Date"
-                        required>
+                    <input matInput type="date" name="startDate" [(ngModel)]="startDate" [pattern]="'\\d{4}-\\d{2}-\\d{2}'" required>
+                    <mat-hint>Add Start Date</mat-hint>
                     <mat-error *ngIf="!startDate"></mat-error>
                 </mat-form-field>
             </div>
             <div class="form-control">
                 <mat-form-field>
-                    <mat-label>Location</mat-label>
-                    <input matInput type="text" name="location" [(ngModel)]="location" placeholder="Add Location"
-                        required>
-                    <mat-error *ngIf="!location"></mat-error>
+                    <mat-label>Developers</mat-label>
+                    <input matInput type="text" name="developers" [(ngModel)]="developers" required>
+                    <mat-hint>Add Developers, (Up to 5 Developers, comma-seperated)</mat-hint>
+                    <mat-error *ngIf="!developers"></mat-error>
                 </mat-form-field>
             </div>
         </div>

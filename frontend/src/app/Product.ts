@@ -3,7 +3,7 @@ export interface NewProduct {
   productOwnerName: string;
   developers: string[];
   scrumMasterName: string;
-  startDate: Date;
+  startDate: string;
   methodology: string;
   location: string;
 }

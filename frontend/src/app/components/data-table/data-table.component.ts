@@ -28,20 +28,20 @@ export class DataTableComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.productService.refreshNeeded$
+    .subscribe(() => {
+      this.updateProducts();
+    });
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.productService.getAllProducts().subscribe(products => {
-      this.data = [...products];
-      this.dataSource.setData(this.data);
-      this.table.renderRows()
-    });
+    this.updateProducts()
   }
+  
   
   updateProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
+      this.dataSource.setData(this.data);
       this.data = [...products]
-      this.dataSource.setData(products);
-      this.table.renderRows();
     });
   }
 }
