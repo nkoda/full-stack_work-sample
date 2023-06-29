@@ -54,7 +54,8 @@ cd nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408
 
 3. Run the dockerfile
 ```
-$ docker build -t my-app .
+docker build -t my-app .
+docker run -p 3000:3000 -p 4200:4200 my-app
 
 ```
 
