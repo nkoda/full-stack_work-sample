@@ -8,7 +8,7 @@
 * [Troubleshooting](#troubleshooting)
 
 ## General info
-A full-stack application which catalogs active projects within an organization.
+A full-stack application work sample which catalogs active projects within an organization.
 	
 ## Technologies
 Project is created with:
@@ -38,12 +38,12 @@ Running this project:
 
 ##### SSH Clone:
 ```
-$ git clone git@github.com:nkoda/Atlas.git
+$ git clone git@github.com:nkoda/full-stack_work-sample.git
 ```
 
 ##### HTTP Clone:
 ```
-$ git clone https://github.com/nkoda/Atlas.git
+$ git clone https://github.com/nkoda/full-stack_work-sample.git
 ```
 
 
