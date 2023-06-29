@@ -20,10 +20,9 @@ Project is created with:
 * typescript: 5.1.3
 
 ## Setup Prereqs: 
-To use this application, you must first install Docker on your local machine to run on the terminal. This should be done by installing bother Docker and Docker-Compose through Brew:
+To use this application, you must first install Docker on your local machine to run on the terminal. This should be done by installing bother Docker through Brew:
 ```
 brew install docker
-brew install docker-compose
 ```
 Other installation versions of Docker can be found [here](https://docs.docker.com/desktop/).
 Additionally Git must be installed on your local machine. Installation documents for Git can be found [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
