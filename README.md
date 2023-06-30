@@ -20,9 +20,10 @@ Project is created with:
 * typescript: 5.1.3
 
 ## Setup Prereqs: 
-To use this application, you must first install Docker on your local machine to run on the terminal. This should be done by installing bother Docker through Brew:
+To use this application, you must first install Docker and Docker-Compose on your local machine to run on the terminal. This should be done by installing bother Docker through Brew:
 ```
 brew install docker
+brew install docker-compose
 ```
 Other installation versions of Docker can be found [here](https://docs.docker.com/desktop/).
 Additionally Git must be installed on your local machine. Installation documents for Git can be found [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
@@ -51,10 +52,11 @@ git clone https://github.com/nkoda/nikko-dumrique-ecc-dssb-IS21-code-challenge-r
 cd nikko-dumrique-ecc-dssb-IS21-code-challenge-req101408
 ```
 
-3. Run the dockerfile
+3. build and run the docker images and compose file
 ```
-docker build -t my-app .
-docker run -p 3000:3000 -p 4200:4200 my-app
+docker build -t backend-image ./backend
+docker build -t frontend-image ./frontend
+docker-compose up
 
 ```
 
